@@ -47,11 +47,12 @@ def get_formatted_json(s):
     desc = s['description']
     url = s['url']
 
-    return "*" + subject + catalog_num + " - " + title + "*\n\n" \
-           "Prereqs: " + prereqs + "\n\n" + \
-           "Antireqs: " + antireqs + "\n\n" + \
-           desc + "\n\n" + \
-           url
+    return (("*" + subject + catalog_num + " - " + title + "*\n\n") \
+           if subject and catalog_num and title else "") + \
+           (("Prereqs: " + prereqs + "\n\n") if prereqs else "") + \
+           (("Antireqs: " + antireqs + "\n\n") if antireqs else "") + \
+           ((desc + "\n\n") if desc else "") + \
+           (url if url else "")
 
 def handle_command(command, channel):
     response = "Invalid query. Note that a sample invocation would be " \
